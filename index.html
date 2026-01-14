@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Партнёрские предложения</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Шапка -->
+        <header class="header">
+            <div class="user-info">
+                <div class="avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-data">
+                    <h2 id="user-name">Гость</h2>
+                    <p>Баланс: <span id="balance">0 ₽</span></p>
+                </div>
+            </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-value" id="total-earned">0 ₽</span>
+                    <span class="stat-label">Заработано</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Навигация -->
+        <nav class="tabs">
+            <button class="tab active" onclick="showTab('offers')">
+                <i class="fas fa-gift"></i> Предложения
+            </button>
+            <button class="tab" onclick="showTab('history')">
+                <i class="fas fa-history"></i> История
+            </button>
+            <button class="tab" onclick="showTab('profile')">
+                <i class="fas fa-user-cog"></i> Настройки
+            </button>
+        </nav>
+
+        <!-- Контент -->
+        <main class="content">
+            <!-- Вкладка Предложения -->
+            <div id="offers-tab" class="tab-content active">
+                <div class="section-header">
+                    <h3><i class="fas fa-star"></i> Рекомендуем</h3>
+                    <p>Оформите и получите вознаграждение</p>
+                </div>
+
+                <div class="offers-grid">
+                    <!-- Карточка предложения 1 -->
+                    <div class="offer-card premium">
+                        <div class="offer-badge">ХИТ</div>
+                        <div class="offer-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <h4>Кредитная карта "Выгодная"</h4>
+                        <p class="offer-description">Кредитный лимит до 500 000 ₽. Кэшбэк до 10%</p>
+                        <div class="offer-reward">
+                            <i class="fas fa-coins"></i>
+                            <span>Вознаграждение: <strong>1500 ₽</strong></span>
+                        </div>
+                        <button class="offer-btn" onclick="openOffer(1)">
+                            <i class="fas fa-external-link-alt"></i> Оформить
+                        </button>
+                    </div>
+
+                    <!-- Карточка предложения 2 -->
+                    <div class="offer-card">
+                        <div class="offer-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <h4>Вклад "Накопительный"</h4>
+                        <p class="offer-description">Ставка до 8% годовых. Пополнение и снятие</p>
+                        <div class="offer-reward">
+                            <i class="fas fa-coins"></i>
+                            <span>Вознаграждение: <strong>800 ₽</strong></span>
+                        </div>
+                        <button class="offer-btn" onclick="openOffer(2)">
+                            <i class="fas fa-external-link-alt"></i> Оформить
+                        </button>
+                    </div>
+
+                    <!-- Карточка предложения 3 -->
+                    <div class="offer-card">
+                        <div class="offer-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Страхование жизни</h4>
+                        <p class="offer-description">Полная защита на 5 лет. Выгодные условия</p>
+                        <div class="offer-reward">
+                            <i class="fas fa-coins"></i>
+                            <span>Вознаграждение: <strong>1200 ₽</strong></span>
+                        </div>
+                        <button class="offer-btn" onclick="openOffer(3)">
+                            <i class="fas fa-external-link-alt"></i> Оформить
+                        </button>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <i class="fas fa-info-circle"></i>
+                    <p>После оформления заявки вознаграждение поступит на баланс в течение 3 рабочих дней</p>
+                </div>
+            </div>
+
+            <!-- Вкладка История -->
+            <div id="history-tab" class="tab-content">
+                <div class="section-header">
+                    <h3><i class="fas fa-history"></i> История операций</h3>
+                </div>
+                
+                <div class="history-list">
+                    <div class="history-empty" id="empty-history">
+                        <i class="fas fa-clock"></i>
+                        <p>Здесь будет история ваших операций</p>
+                    </div>
+                    <!-- История будет добавляться через JS -->
+                </div>
+            </div>
+
+            <!-- Вкладка Настройки -->
+            <div id="profile-tab" class="tab-content">
+                <div class="section-header">
+                    <h3><i class="fas fa-user-cog"></i> Настройки</h3>
+                </div>
+                
+                <div class="settings-list">
+                    <div class="setting-item">
+                        <i class="fas fa-bell"></i>
+                        <div>
+                            <h4>Уведомления</h4>
+                            <p>Получать новости о новых предложениях</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-item">
+                        <i class="fas fa-share-alt"></i>
+                        <div>
+                            <h4>Реферальная ссылка</h4>
+                            <p>Приглашайте друзей и получайте бонусы</p>
+                        </div>
+                        <button class="copy-btn" onclick="copyRefLink()">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+
+                    <div class="setting-item" onclick="showSupport()">
+                        <i class="fas fa-headset"></i>
+                        <div>
+                            <h4>Поддержка</h4>
+                            <p>Задать вопрос или получить помощь</p>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Футер -->
+        <footer class="footer">
+            <p>© 2024 Партнёрская программа. Все предложения партнёров.</p>
+        </footer>
+    </div>
+
+    <!-- Модальное окно -->
+    <div id="offerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3 id="modal-title">Оформление заявки</h3>
+            <p id="modal-description"></p>
+            <div class="modal-actions">
+                <button class="btn-secondary" onclick="closeModal()">Отмена</button>
+                <button class="btn-primary" onclick="confirmOffer()">Перейти к оформлению</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Уведомление -->
+    <div id="notification" class="notification">
+        <span id="notification-text"></span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
