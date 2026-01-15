@@ -175,7 +175,7 @@ function initTelegramApp() {
     if (typeof window.Telegram !== 'undefined') {
         const tg = window.Telegram.WebApp;
         
-        // Расширить на весь экран
+        // Расширить на ь экран
         tg.expand();
         
         // Изменить цвет кнопки
