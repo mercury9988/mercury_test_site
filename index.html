@@ -3,191 +3,401 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Партнёрские предложения</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Mercury Bot</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Шапка -->
-        <header class="header">
-            <div class="user-info">
-                <div class="avatar">
-                    <i class="fas fa-user"></i>
-                </div>
-                <div class="user-data">
-                    <h2 id="user-name">Гость</h2>
-                    <p>Баланс: <span id="balance">0 ₽</span></p>
-                </div>
+    <div class="app-container">
+        <!-- Верхняя панель с названием -->
+        <header class="app-header">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h1 class="neon-text">MERCURY BOT</h1>
             </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <span class="stat-value" id="total-earned">0 ₽</span>
-                    <span class="stat-label">Заработано</span>
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-info">
+                    <span class="username">Mercury</span>
+                    <span class="user-level">⭐ Продвинутый партнёр</span>
                 </div>
             </div>
         </header>
 
-        <!-- Навигация -->
-        <nav class="tabs">
-            <button class="tab active" onclick="showTab('offers')">
-                <i class="fas fa-gift"></i> Предложения
-            </button>
-            <button class="tab" onclick="showTab('history')">
-                <i class="fas fa-history"></i> История
-            </button>
-            <button class="tab" onclick="showTab('profile')">
-                <i class="fas fa-user-cog"></i> Настройки
-            </button>
-        </nav>
-
-        <!-- Контент -->
-        <main class="content">
-            <!-- Вкладка Предложения -->
-            <div id="offers-tab" class="tab-content active">
-                <div class="section-header">
-                    <h3><i class="fas fa-star"></i> Рекомендуем</h3>
-                    <p>Оформите и получите вознаграждение</p>
+        <!-- Основной контент -->
+        <main class="main-content">
+            <!-- Вкладка Главная -->
+            <section id="home-tab" class="tab-content active">
+                <div class="welcome-section">
+                    <h2 class="neon-subtitle">Зарабатывать можно не работая</h2>
+                    <p class="welcome-text">Добро пожаловать! Начни зарабатывать уже сегодня с нашей проверенной системой партнёрских программ</p>
+                    
+                    <button class="neon-button start-earning-btn">
+                        <i class="fas fa-rocket"></i> Начать зарабатывать
+                    </button>
                 </div>
 
-                <div class="offers-grid">
-                    <!-- Карточка предложения 1 -->
-                    <div class="offer-card premium">
-                        <div class="offer-badge">ХИТ</div>
-                        <div class="offer-icon">
-                            <i class="fas fa-credit-card"></i>
+                <div class="stats-section">
+                    <h3><i class="fas fa-chart-line"></i> Ваша статистика</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div class="stat-value neon-cyan">0 ₽</div>
+                            <div class="stat-label">Заработок</div>
                         </div>
-                        <h4>Кредитная карта "Выгодная"</h4>
-                        <p class="offer-description">Кредитный лимит до 500 000 ₽. Кэшбэк до 10%</p>
-                        <div class="offer-reward">
-                            <i class="fas fa-coins"></i>
-                            <span>Вознаграждение: <strong>1500 ₽</strong></span>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-value neon-purple">0</div>
+                            <div class="stat-label">Рефералы</div>
                         </div>
-                        <button class="offer-btn" onclick="openOffer(1)">
-                            <i class="fas fa-external-link-alt"></i> Оформить
-                        </button>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <h3><i class="fas fa-bolt"></i> Быстрые действия</h3>
+                    <button class="action-button">
+                        <i class="fas fa-play-circle"></i> Начать зарабатывать
+                    </button>
+                </div>
+
+                <div class="popular-section">
+                    <h3><i class="fas fa-fire"></i> Популярное</h3>
+                    <p class="section-subtitle">Выбери направление и начни получать доход</p>
+                    
+                    <div class="categories-grid">
+                        <div class="category-card">
+                            <div class="category-icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div class="category-info">
+                                <h4>PKO (8.700 руб+)</h4>
+                                <p>Выбери для просмотра предложений</p>
+                            </div>
+                            <div class="category-arrow">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="category-card">
+                            <div class="category-icon">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <div class="category-info">
+                                <h4>Дебет. Карты (4.500 руб+)</h4>
+                                <p>Выбери для просмотра предложений</p>
+                            </div>
+                            <div class="category-arrow">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="features-section">
+                    <h3><i class="fas fa-star"></i> Почему выбирают нас</h3>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon neon-green">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <h4>100% легально</h4>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon neon-yellow">
+                                <i class="fas fa-gift"></i>
+                            </div>
+                            <h4>Бонусы</h4>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon neon-blue">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <h4>Быстрые выплаты</h4>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon neon-pink">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4>Высокий доход</h4>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Вкладка Заработок -->
+            <section id="earnings-tab" class="tab-content">
+                <div class="page-header">
+                    <h2><i class="fas fa-coins"></i> Заработок</h2>
+                    <p>Выбери направление и получай до 50 000₽ ежемесячно</p>
+                </div>
+
+                <div class="offers-container">
+                    <div class="offer-category">
+                        <h3 class="neon-cyan">PKO предложения</h3>
+                        <div class="offer-list">
+                            <div class="offer-item">
+                                <div class="offer-badge">ХИТ</div>
+                                <div class="offer-main">
+                                    <h4>Кредитная карта "Премиум"</h4>
+                                    <p class="offer-desc">Лимит до 500 000 ₽, кэшбэк до 15%</p>
+                                    <div class="offer-reward">
+                                        <i class="fas fa-trophy"></i>
+                                        <span>Вознаграждение: <strong class="neon-cyan">8 700 ₽</strong></span>
+                                    </div>
+                                </div>
+                                <button class="offer-btn">
+                                    <i class="fas fa-external-link-alt"></i> Оформить
+                                </button>
+                            </div>
+
+                            <div class="offer-item">
+                                <div class="offer-main">
+                                    <h4>Кредит наличными</h4>
+                                    <p class="offer-desc">Ставка от 5.9%, сумма до 5 млн ₽</p>
+                                    <div class="offer-reward">
+                                        <i class="fas fa-trophy"></i>
+                                        <span>Вознаграждение: <strong class="neon-cyan">6 500 ₽</strong></span>
+                                    </div>
+                                </div>
+                                <button class="offer-btn">
+                                    <i class="fas fa-external-link-alt"></i> Оформить
+                                </button>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Карточка предложения 2 -->
-                    <div class="offer-card">
-                        <div class="offer-icon">
-                            <i class="fas fa-university"></i>
+                    <div class="offer-category">
+                        <h3 class="neon-purple">Дебетовые карты</h3>
+                        <div class="offer-list">
+                            <div class="offer-item">
+                                <div class="offer-main">
+                                    <h4>Карта "Cashback Pro"</h4>
+                                    <p class="offer-desc">Кэшбэк до 10% на всё, бесплатное обслуживание</p>
+                                    <div class="offer-reward">
+                                        <i class="fas fa-trophy"></i>
+                                        <span>Вознаграждение: <strong class="neon-purple">4 500 ₽</strong></span>
+                                    </div>
+                                </div>
+                                <button class="offer-btn">
+                                    <i class="fas fa-external-link-alt"></i> Оформить
+                                </button>
+                            </div>
                         </div>
-                        <h4>Вклад "Накопительный"</h4>
-                        <p class="offer-description">Ставка до 8% годовых. Пополнение и снятие</p>
-                        <div class="offer-reward">
-                            <i class="fas fa-coins"></i>
-                            <span>Вознаграждение: <strong>800 ₽</strong></span>
-                        </div>
-                        <button class="offer-btn" onclick="openOffer(2)">
-                            <i class="fas fa-external-link-alt"></i> Оформить
-                        </button>
-                    </div>
-
-                    <!-- Карточка предложения 3 -->
-                    <div class="offer-card">
-                        <div class="offer-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h4>Страхование жизни</h4>
-                        <p class="offer-description">Полная защита на 5 лет. Выгодные условия</p>
-                        <div class="offer-reward">
-                            <i class="fas fa-coins"></i>
-                            <span>Вознаграждение: <strong>1200 ₽</strong></span>
-                        </div>
-                        <button class="offer-btn" onclick="openOffer(3)">
-                            <i class="fas fa-external-link-alt"></i> Оформить
-                        </button>
                     </div>
                 </div>
 
                 <div class="info-box">
                     <i class="fas fa-info-circle"></i>
-                    <p>После оформления заявки вознаграждение поступит на баланс в течение 3 рабочих дней</p>
+                    <p>После успешного оформления вознаграждение поступает на баланс в течение 3 рабочих дней</p>
                 </div>
-            </div>
+            </section>
 
-            <!-- Вкладка История -->
-            <div id="history-tab" class="tab-content">
-                <div class="section-header">
-                    <h3><i class="fas fa-history"></i> История операций</h3>
+            <!-- Вкладка Поддержка -->
+            <section id="support-tab" class="tab-content">
+                <div class="page-header">
+                    <h2><i class="fas fa-headset"></i> Поддержка</h2>
+                    <p>Мы всегда готовы помочь вам с любыми вопросами</p>
                 </div>
-                
-                <div class="history-list">
-                    <div class="history-empty" id="empty-history">
-                        <i class="fas fa-clock"></i>
-                        <p>Здесь будет история ваших операций</p>
-                    </div>
-                    <!-- История будет добавляться через JS -->
-                </div>
-            </div>
 
-            <!-- Вкладка Настройки -->
-            <div id="profile-tab" class="tab-content">
-                <div class="section-header">
-                    <h3><i class="fas fa-user-cog"></i> Настройки</h3>
-                </div>
-                
-                <div class="settings-list">
-                    <div class="setting-item">
-                        <i class="fas fa-bell"></i>
-                        <div>
-                            <h4>Уведомления</h4>
-                            <p>Получать новости о новых предложениях</p>
+                <div class="support-content">
+                    <div class="support-card">
+                        <div class="support-icon">
+                            <i class="fas fa-comment-dots"></i>
                         </div>
-                        <label class="switch">
-                            <input type="checkbox" checked>
-                            <span class="slider"></span>
-                        </label>
+                        <div class="support-info">
+                            <h3>Онлайн-чат</h3>
+                            <p>Быстрая помощь в реальном времени</p>
+                            <button class="support-btn">
+                                <i class="fas fa-comments"></i> Написать в чат
+                            </button>
+                        </div>
                     </div>
 
-                    <div class="setting-item">
-                        <i class="fas fa-share-alt"></i>
-                        <div>
-                            <h4>Реферальная ссылка</h4>
-                            <p>Приглашайте друзей и получайте бонусы</p>
+                    <div class="support-card">
+                        <div class="support-icon">
+                            <i class="fas fa-envelope"></i>
                         </div>
-                        <button class="copy-btn" onclick="copyRefLink()">
-                            <i class="fas fa-copy"></i>
+                        <div class="support-info">
+                            <h3>Email поддержка</h3>
+                            <p>Ответ в течение 24 часов</p>
+                            <button class="support-btn">
+                                <i class="fas fa-paper-plane"></i> Написать email
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="faq-section">
+                        <h3><i class="fas fa-question-circle"></i> Частые вопросы</h3>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Как получить выплату?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Выплаты доступны при достижении минимальной суммы 500 ₽. Заказать выплату можно в разделе "Меню" → "Заказать выплату".</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Как приглашать рефералов?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Используйте реферальную ссылку из раздела "Меню". Вы получаете процент от заработка каждого приглашённого вами пользователя.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Вкладка Меню -->
+            <section id="menu-tab" class="tab-content">
+                <div class="page-header">
+                    <h2><i class="fas fa-bars"></i> Меню</h2>
+                    <p>Управление профилем и настройки</p>
+                </div>
+
+                <div class="profile-section">
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="profile-info">
+                            <h3>Mercury</h3>
+                            <p class="user-tag">@GoogleAsistent</p>
+                            <span class="partner-level">⭐ Продвинутый партнёр</span>
+                        </div>
+                    </div>
+
+                    <div class="balance-section">
+                        <h3><i class="fas fa-wallet"></i> Балансы</h3>
+                        <div class="balance-cards">
+                            <div class="balance-card">
+                                <div class="balance-label">Основной баланс</div>
+                                <div class="balance-value">0.00₽</div>
+                            </div>
+                            <div class="balance-card">
+                                <div class="balance-label">Бонусный баланс</div>
+                                <div class="balance-value">0.00₽</div>
+                            </div>
+                        </div>
+                        <button class="withdraw-btn neon-button">
+                            <i class="fas fa-money-check-alt"></i> Заказать выплату
                         </button>
                     </div>
 
-                    <div class="setting-item" onclick="showSupport()">
-                        <i class="fas fa-headset"></i>
-                        <div>
-                            <h4>Поддержка</h4>
-                            <p>Задать вопрос или получить помощь</p>
+                    <div class="referral-section">
+                        <h3><i class="fas fa-share-alt"></i> Реферальная система</h3>
+                        <div class="referral-link">
+                            <div class="link-box">
+                                <span class="link-text">https://t.me/PKOTESTBOT?start=ref_bq...</span>
+                                <button class="copy-btn">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            <p class="referral-info">Делитесь ссылкой и получайте процент от заработка рефералов</p>
                         </div>
-                        <i class="fas fa-chevron-right"></i>
+                    </div>
+
+                    <div class="menu-options">
+                        <h3><i class="fas fa-cog"></i> Настройки</h3>
+                        <div class="options-list">
+                            <div class="menu-item">
+                                <div class="menu-icon">
+                                    <i class="fas fa-bell"></i>
+                                </div>
+                                <div class="menu-text">
+                                    <h4>Уведомления</h4>
+                                    <p>Настройки оповещений</p>
+                                </div>
+                                <div class="menu-switch">
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="menu-item">
+                                <div class="menu-icon">
+                                    <i class="fas fa-history"></i>
+                                </div>
+                                <div class="menu-text">
+                                    <h4>История операций</h4>
+                                    <p>Все ваши транзакции</p>
+                                </div>
+                                <div class="menu-arrow">
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
+                            </div>
+
+                            <div class="menu-item">
+                                <div class="menu-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="menu-text">
+                                    <h4>Безопасность</h4>
+                                    <p>Настройки безопасности аккаунта</p>
+                                </div>
+                                <div class="menu-arrow">
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
+                            </div>
+
+                            <div class="menu-item">
+                                <div class="menu-icon">
+                                    <i class="fas fa-moon"></i>
+                                </div>
+                                <div class="menu-text">
+                                    <h4>Тёмная тема</h4>
+                                    <p>Использовать тёмный интерфейс</p>
+                                </div>
+                                <div class="menu-switch">
+                                    <label class="switch">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </main>
 
-        <!-- Футер -->
-        <footer class="footer">
-            <p>© 2024 Партнёрская программа. Все предложения партнёров.</p>
-        </footer>
-    </div>
+        <!-- Нижняя навигация -->
+        <nav class="bottom-nav">
+            <button class="nav-btn active" onclick="switchTab('home')">
+                <i class="fas fa-home"></i>
+                <span>Главная</span>
+            </button>
+            <button class="nav-btn" onclick="switchTab('earnings')">
+                <i class="fas fa-coins"></i>
+                <span>Заработок</span>
+            </button>
+            <button class="nav-btn" onclick="switchTab('support')">
+                <i class="fas fa-headset"></i>
+                <span>Поддержка</span>
+            </button>
+            <button class="nav-btn" onclick="switchTab('menu')">
+                <i class="fas fa-bars"></i>
+                <span>Меню</span>
+            </button>
+        </nav>
 
-    <!-- Модальное окно -->
-    <div id="offerModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h3 id="modal-title">Оформление заявки</h3>
-            <p id="modal-description"></p>
-            <div class="modal-actions">
-                <button class="btn-secondary" onclick="closeModal()">Отмена</button>
-                <button class="btn-primary" onclick="confirmOffer()">Перейти к оформлению</button>
-            </div>
+        <!-- Уведомление -->
+        <div id="notification" class="notification">
+            <span id="notification-text"></span>
         </div>
-    </div>
-
-    <!-- Уведомление -->
-    <div id="notification" class="notification">
-        <span id="notification-text"></span>
     </div>
 
     <script src="script.js"></script>
 </body>
-</html>
+                        </html>
