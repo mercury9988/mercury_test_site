@@ -1,160 +1,151 @@
 // Инициализация приложения
 document.addEventListener('DOMContentLoaded', function() {
-    // Загрузка данных пользователя из Telegram
-    loadUserData();
+    // Установим имя пользователя из Telegram, если доступно
+    initUserData();
     
-    // Инициализация истории
-    initHistory();
+    // Инициализируем FAQ аккордеон
+    initFAQ();
+    
+    // Инициализируем переключатели
+    initSwitches();
+    
+    // Имитация загрузки данных
+    simulateDataLoading();
 });
 
-// Данные предложений
-const offers = {
-    1: {
-        title: "Кредитная карта 'Выгодная'",
-        description: "Вы будете перенаправлены на сайт банка для оформления заявки. После успешного оформления вознаграждение 1500 ₽ будет зачислено на ваш баланс.",
-        reward: 1500,
-        link: "https://example.com/card-1"
-    },
-    2: {
-        title: "Вклад 'Накопительный'",
-        description: "Откройте вклад на сайте банка и получите 800 ₽ вознаграждения после пополнения счета.",
-        reward: 800,
-        link: "https://example.com/deposit-1"
-    },
-    3: {
-        title: "Страхование жизни",
-        description: "Оформите полис страхования жизни и получите 1200 ₽ на баланс.",
-        reward: 1200,
-        link: "https://example.com/insurance-1"
-    }
-};
-
 // Переключение вкладок
-function showTab(tabName) {
+function switchTab(tabName) {
     // Скрыть все вкладки
     document.querySelectorAll('.tab-content').forEach(tab => {
         tab.classList.remove('active');
     });
     
-    // Убрать активный класс со всех кнопок
-    document.querySelectorAll('.tab').forEach(button => {
-        button.classList.remove('active');
+    // Убрать активный класс со всех кнопок навигации
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('active');
     });
     
     // Показать выбранную вкладку
     document.getElementById(tabName + '-tab').classList.add('active');
     
-    // Активировать кнопку
-    event.target.classList.add('active');
+    // Активировать соответствующую кнопку навигации
+    document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
 }
 
-// Загрузка данных пользователя
-function loadUserData() {
-    // В реальном приложении здесь будет запрос к Telegram API
-    // Для демо используем тестовые данные
-    setTimeout(() => {
-        document.getElementById('user-name').textContent = 'Алексей Петров';
-        document.getElementById('balance').textContent = '2 450 ₽';
-        document.getElementById('total-earned').textContent = '8 900 ₽';
-    }, 500);
-}
-
-// Открытие модального окна с предложением
-function openOffer(offerId) {
-    const offer = offers[offerId];
-    if (!offer) return;
+// Инициализация данных пользователя
+function initUserData() {
+    // В реальном приложении здесь будет получение данных из Telegram
+    const tg = window.Telegram?.WebApp;
     
-    document.getElementById('modal-title').textContent = offer.title;
-    document.getElementById('modal-description').textContent = offer.description;
-    
-    // Сохраняем ID предложения в data-атрибут
-    document.querySelector('.modal-content').dataset.offerId = offerId;
-    
-    // Показываем модальное окно
-    document.getElementById('offerModal').style.display = 'flex';
-}
-
-// Закрытие модального окна
-function closeModal() {
-    document.getElementById('offerModal').style.display = 'none';
-}
-
-// Подтверждение оформления
-function confirmOffer() {
-    const offerId = document.querySelector('.modal-content').dataset.offerId;
-    const offer = offers[offerId];
-    
-    if (!offer) return;
-    
-    // В реальном приложении здесь будет логика перенаправления
-    // и отслеживания перехода
-    
-    // Показываем уведомление
-    showNotification(`Вы переходите к оформлению: ${offer.title}`);
-    
-    // Закрываем модальное окно
-    closeModal();
-    
-    // В реальном приложении:
-    // window.location.href = offer.link;
-    
-    // Для демо просто показываем сообщение
-    setTimeout(() => {
-        showNotification('Заявка принята! Вознаграждение будет зачислено после оформления.');
-        addToHistory(offer);
-    }, 1500);
-}
-
-// Инициализация истории
-function initHistory() {
-    // В реальном приложении здесь загрузка из localStorage или API
-    const history = JSON.parse(localStorage.getItem('offerHistory')) || [];
-    
-    if (history.length === 0) {
-        document.getElementById('empty-history').style.display = 'block';
-    } else {
-        document.getElementById('empty-history').style.display = 'none';
-        // Отображаем историю
+    if (tg && tg.initDataUnsafe?.user) {
+        const user = tg.initDataUnsafe.user;
+        document.querySelector('.username').textContent = user.first_name || 'Пользователь';
+        document.querySelector('.profile-info h3').textContent = user.first_name || 'Пользователь';
+        
+        if (user.username) {
+            document.querySelector('.user-tag').textContent = '@' + user.username;
+        }
     }
 }
 
-// Добавление в историю
-function addToHistory(offer) {
-    const history = JSON.parse(localStorage.getItem('offerHistory')) || [];
+// Инициализация FAQ аккордеона
+function initFAQ() {
+    const faqQuestions = document.querySelectorAll('.faq-question');
     
-    const historyItem = {
-        title: offer.title,
-        reward: offer.reward,
-        date: new Date().toLocaleDateString('ru-RU'),
-        status: 'pending'
-    };
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            const faqItem = question.parentElement;
+            faqItem.classList.toggle('active');
+            
+            // Закрыть другие открытые вопросы
+            faqQuestions.forEach(otherQuestion => {
+                if (otherQuestion !== question) {
+                    otherQuestion.parentElement.classList.remove('active');
+                }
+            });
+        });
+    });
+}
+
+// Инициализация переключателей
+function initSwitches() {
+    const switches = document.querySelectorAll('.switch input');
     
-    history.unshift(historyItem);
-    localStorage.setItem('offerHistory', JSON.stringify(history));
+    switches.forEach(switchInput => {
+        switchInput.addEventListener('change', function() {
+            const setting = this.closest('.menu-item').querySelector('h4').textContent;
+            showNotification(`Настройка "${setting}" ${this.checked ? 'включена' : 'выключена'}`);
+        });
+    });
     
-    // Обновляем отображение
-    initHistory();
+    // Тёмная тема переключатель
+    const themeSwitch = document.querySelector('.menu-item:nth-child(4) .switch input');
+    if (themeSwitch) {
+        themeSwitch.checked = true; // По умолчанию тёмная тема включена
+        themeSwitch.addEventListener('change', function() {
+            showNotification(`Тёмная тема ${this.checked ? 'включена' : 'выключена'}`);
+        });
+    }
 }
 
 // Копирование реферальной ссылки
-function copyRefLink() {
-    const refLink = 'https://t.me/your_bot?start=ref12345';
+document.querySelector('.copy-btn')?.addEventListener('click', function() {
+    const linkText = document.querySelector('.link-text').textContent;
     
-    navigator.clipboard.writeText(refLink)
+    navigator.clipboard.writeText(linkText)
         .then(() => {
             showNotification('Реферальная ссылка скопирована!');
         })
         .catch(err => {
             console.error('Ошибка копирования: ', err);
-            showNotification('Ошибка копирования');
+            showNotification('Ошибка при копировании');
         });
-}
+});
 
-// Показ поддержки
-function showSupport() {
-    // В реальном приложении открыть чат с ботом
-    showNotification('Открывается чат с поддержкой...');
-}
+// Обработка кнопки "Начать зарабатывать"
+document.querySelectorAll('.start-earning-btn, .action-button').forEach(btn => {
+    btn.addEventListener('click', function() {
+        showNotification('Переход к предложениям по заработку...');
+        setTimeout(() => {
+            switchTab('earnings');
+        }, 500);
+    });
+});
+
+// Обработка кнопок предложений
+document.querySelectorAll('.offer-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const offerTitle = this.closest('.offer-item').querySelector('h4').textContent;
+        showNotification(`Открывается оформление: ${offerTitle}`);
+        
+        // В реальном приложении здесь будет переход по ссылке
+        // window.open('ссылка-на-оффер', '_blank');
+    });
+});
+
+// Обработка кнопок поддержки
+document.querySelectorAll('.support-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const supportType = this.closest('.support-card').querySelector('h3').textContent;
+        showNotification(`Открывается ${supportType}...`);
+    });
+});
+
+// Обработка кнопки "Заказать выплату"
+document.querySelector('.withdraw-btn')?.addEventListener('click', function() {
+    showNotification('Открывается форма заказа выплаты...');
+    
+    // В реальном приложении здесь будет модальное окно или переход
+});
+
+// Обработка кликов по карточкам категорий
+document.querySelectorAll('.category-card').forEach(card => {
+    card.addEventListener('click', function() {
+        const categoryName = this.querySelector('h4').textContent;
+        showNotification(`Открываются предложения: ${categoryName}`);
+        switchTab('earnings');
+    });
+});
 
 // Показать уведомление
 function showNotification(text) {
@@ -170,35 +161,38 @@ function showNotification(text) {
     }, 3000);
 }
 
-// Обработка клика вне модального окна
-window.onclick = function(event) {
-    const modal = document.getElementById('offerModal');
-    if (event.target === modal) {
-        closeModal();
-    }
-};
+// Имитация загрузки данных
+function simulateDataLoading() {
+    // Имитируем загрузку данных с задержкой
+    setTimeout(() => {
+        // В реальном приложении здесь будет запрос к API
+        console.log('Данные пользователя загружены');
+    }, 1000);
+}
 
-// Для интеграции с Telegram Mini Apps (пример)
+// Для интеграции с Telegram Mini App
 function initTelegramApp() {
-    // В реальном приложении используйте Telegram WebApp API
     if (typeof window.Telegram !== 'undefined') {
         const tg = window.Telegram.WebApp;
         
         // Расширить на весь экран
         tg.expand();
         
-        // Получить данные пользователя
-        const user = tg.initDataUnsafe.user;
+        // Изменить цвет кнопки
+        tg.MainButton.setParams({
+            text: 'ЗАРАБАТЫВАТЬ',
+            color: '#00f3ff',
+            text_color: '#000000'
+        });
         
-        if (user) {
-            document.getElementById('user-name').textContent = 
-                user.first_name + (user.last_name ? ' ' + user.last_name : '');
-        }
+        // Обработка события нажатия кнопки
+        tg.MainButton.onClick(() => {
+            switchTab('earnings');
+        });
         
-        // Настроить кнопку закрытия
-        tg.BackButton.onClick(closeModal);
+        tg.MainButton.show();
     }
 }
 
-// Инициализация Telegram Mini App
-initTelegramApp();
+// Инициализация Telegram Mini App (если используется)
+// initTelegramApp();
